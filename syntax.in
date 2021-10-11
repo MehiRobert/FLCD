@@ -1,0 +1,14 @@
+program = "VAR" decllist ";" cmpdstmt "."
+decllist = declaration | declaration ";" decllist declaration ::= IDENTIFIER ":" type
+type1 = "BOOLEAN" | "CHAR" | "INTEGER" | "REAL" arraydecl ::= "ARRAY" "[" nr "]" "OF" type1
+type = type1|arraydecl 
+stmtlist = stmt | stmt ";" stmtlist
+stmt = simplstmt | structstmt
+simplstmt = assignstmt | iostmt
+assignstmt = IDENTIFIER ":=" expression expression ::= expression "+" term | term
+term = term "*" factor | factor
+factor = "(" expression ")" | IDENTIFIER
+iostmt = "write" | "WRITE" "(" IDENTIFIER ")" structstmt ::= cmpdstmt | ifstmt | whilestmt
+ifstmt = "VERIFY" condition "THEN" stmt ["OTHERWISE" stmt] 
+whilestmt ::= "WHILE" condition ":" "DO" stmt
+condition = expression RELATION expression RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
