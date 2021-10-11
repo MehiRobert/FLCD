@@ -21,11 +21,11 @@ Alphabet:
     c. constants 
 
         1.integer - rule: 
-            const = [ ("+" |"-") ] non_zeroDigit {digit} | 0
+            int_number = [ ("+" |"-") ] non_zeroDigit {digit} | 0
         2. character: 
-            character = 'letter' | 'digit'
+            char = 'letter' | 'digit'
         3. string 
             constString = "string"
             string = character {string}
-            char = letter | digit 
+            char_str = letter | digit 
 

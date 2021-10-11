@@ -1,14 +1,16 @@
-program = "VAR" decllist ";" cmpdstmt "."
-decllist = declaration | declaration ";" decllist declaration ::= IDENTIFIER ":" type
-type1 = "BOOLEAN" | "CHAR" | "INTEGER" | "REAL" arraydecl ::= "ARRAY" "[" nr "]" "OF" type1
-type = type1|arraydecl 
+compoundStmt = (declarationStmt | arrayDeclarationStatement | statement) ";" [compoundStatement]
+arrayDeclarationStatement = identifier ":" primitiveType "." "array" "("  int_number  ")"
+primitiveType = "integer" | "character" | "string" | "boolean"
+constValue = int_number | char | constString
 stmtlist = stmt | stmt ";" stmtlist
-stmt = simplstmt | structstmt
-simplstmt = assignstmt | iostmt
-assignstmt = IDENTIFIER ":=" expression expression ::= expression "+" term | term
+statement = assigntStmt | ioStatement | ifStmt | whileStmt
+ioStatement = readStmt | writeStmt 
+assignStmt = identifier "=" expression
 term = term "*" factor | factor
 factor = "(" expression ")" | IDENTIFIER
-iostmt = "write" | "WRITE" "(" IDENTIFIER ")" structstmt ::= cmpdstmt | ifstmt | whilestmt
-ifstmt = "VERIFY" condition "THEN" stmt ["OTHERWISE" stmt] 
-whilestmt ::= "WHILE" condition ":" "DO" stmt
-condition = expression RELATION expression RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
+readStmt = read "(" identifier ")"
+writeStmt = write "(" identifier ")"
+ifStmt = "VERIFY" "[" condition "]" ":" "{" compoundStatement "}" ["OTHERWISE" "{" compoundStatement "}"] 
+whileStmt ::= "WHILE" "[" condition "]" ":" "{" compoundStatement "}"
+condition = expression RELATION expression 
+relationalOperator =  "<" | ">" | "<=" | ">=" | "==" || "!=" | "&" | "|" | "<>"
