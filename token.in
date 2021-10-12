@@ -3,13 +3,16 @@
 *
 /
 =
-%
-,
 <
 >
 <=
-and
-or
+>=
+<>
+==
+!=
+%
+&&
+||
 []
 ()
 stop
@@ -18,3 +21,6 @@ otherwise
 write
 integer
 character
+string
+boolean
+do

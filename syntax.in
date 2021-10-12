@@ -1,14 +1,17 @@
-program = "VAR" decllist ";" cmpdstmt "."
-decllist = declaration | declaration ";" decllist declaration ::= IDENTIFIER ":" type
-type1 = "BOOLEAN" | "CHAR" | "INTEGER" | "REAL" arraydecl ::= "ARRAY" "[" nr "]" "OF" type1
-type = type1|arraydecl 
-stmtlist = stmt | stmt ";" stmtlist
-stmt = simplstmt | structstmt
-simplstmt = assignstmt | iostmt
-assignstmt = IDENTIFIER ":=" expression expression ::= expression "+" term | term
-term = term "*" factor | factor
-factor = "(" expression ")" | IDENTIFIER
-iostmt = "write" | "WRITE" "(" IDENTIFIER ")" structstmt ::= cmpdstmt | ifstmt | whilestmt
-ifstmt = "VERIFY" condition "THEN" stmt ["OTHERWISE" stmt] 
-whilestmt ::= "WHILE" condition ":" "DO" stmt
-condition = expression RELATION expression RELATION ::= "<" | "<=" | "=" | "<>" | ">=" | ">"
+compoundStmt = (declarationStmt | arrayDeclarationStmt | statement) "," [compoundStmt]
+arrayDeclarationStmt = identifier ":" primitiveType "." "array" "("  int_number  ")"
+declarationStmt = ("const" | "let") identifier ":" primitiveType ["=" expression]
+primitiveType = "integer" | "character" | "string" | "boolean"
+constValue = int_number | char | constString | bool
+statement = assigntStmt | ioStatement | ifStmt | whileStmt
+ioStmt = readStmt | writeStmt 
+assignStmt = identifier "=" expression
+readStmt = read "(" identifier ")"
+writeStmt = write "(" identifier ")"
+term = factor [("*" | "/") term]
+expression = term [("+" | "-") expression]
+factor = int_number | identifier |  "(" expression ")"
+ifStmt = "VERIFY" "[" condition "]" ":" "do" "{" compoundStatement "}" ["OTHERWISE" ":" "do" "{" compoundStatement "}"] 
+whileStmt ::= "WHILE" "[" condition "]" "{" compoundStatement "}"
+condition = expression relationalOperator expression 
+relationalOperator =  "<" | ">" | "<=" | ">=" | "==" || "!=" | "&&" | "||" | "<>"
