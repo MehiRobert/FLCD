@@ -10,12 +10,12 @@ Alphabet:
         - operators + - * / : = <= >= % 
         - separators [] {} , space ()
         - reserved words: 
-             Verify integer otherwise character For write string 
+             Verify integer otherwise character For write string do 
     b.identifiers 
 
-        identifier := letter | letter {letter} {digit}
-        letter := "A" | "B" | ....... | "Z" | "a" | "b" | ... | "z"
-        digit := "0" | "1" | ..... | "9"
+        identifier = letter | letter {letter} {digit}
+        letter = "A" | "B" | ....... | "Z" | "a" | "b" | ... | "z"
+        digit = "0" | "1" | ..... | "9"
         non_zeroDigit := "1" | "2" | "3" | .... | "9"
 
     c. constants 
@@ -28,4 +28,6 @@ Alphabet:
             constString = "string"
             string = character {string}
             char_str = letter | digit 
+        4.  boolean
+            bool = "true" | "false"
 
