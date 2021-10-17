@@ -1,0 +1,70 @@
+import org.junit.Test;
+
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class SymbolTable {
+
+    private final String[] symbolTable;
+    private final int capacity;
+
+    public SymbolTable(int capacity) {
+        this.capacity = capacity;
+        this.symbolTable = new String[capacity];
+    }
+
+    private int hashFunction(String key) {
+        int asciiSum = 0;
+        for(int i = 0; i < key.length(); i++)
+        {
+            asciiSum += key.charAt(i);
+        }
+
+        return asciiSum % capacity;
+    }
+
+    public int addInSymbolTable(String token) {
+
+        int positionInTable = 0;
+        for (String entry: symbolTable)
+        {
+
+            if(entry != null && entry.equals(token))
+            {
+                System.out.println("Found at position " + positionInTable);
+               return positionInTable;
+            }
+            positionInTable++;
+
+        }
+
+        //compute the hash
+        int hashValue = hashFunction(token);
+
+        //no collisions
+        if(symbolTable[hashValue] == null)
+        {
+            symbolTable[hashValue] = token;
+            System.out.println("Added at position" + hashValue);
+            return hashValue;
+        }
+
+        //linear probing
+        int collisionHash = hashValue;
+        while(symbolTable[collisionHash] != null){
+            collisionHash++;
+        }
+        if(symbolTable[collisionHash] == null)
+        {
+            symbolTable[collisionHash] = token;
+            System.out.println("Added at position" + collisionHash);
+            return hashValue;
+        }
+        return -1;
+    }
+
+
+
+
+}
+
