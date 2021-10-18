@@ -1,7 +1,5 @@
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
 
 public class SymbolTable {
 
@@ -13,6 +11,7 @@ public class SymbolTable {
         this.symbolTable = new String[capacity];
     }
 
+    //hash function that computes the sum of the ascii codes of a string, then it "%" to the size of the hash table
     private int hashFunction(String key) {
         int asciiSum = 0;
         for(int i = 0; i < key.length(); i++)
@@ -29,6 +28,7 @@ public class SymbolTable {
         for (String entry: symbolTable)
         {
 
+            // in case we find the element we return it's position
             if(entry != null && entry.equals(token))
             {
                 System.out.println("Found at position " + positionInTable);
@@ -54,12 +54,14 @@ public class SymbolTable {
         while(symbolTable[collisionHash] != null){
             collisionHash++;
         }
+        // after we have found an empty position, we place the element on its position and then we return the position
         if(symbolTable[collisionHash] == null)
         {
             symbolTable[collisionHash] = token;
             System.out.println("Added at position" + collisionHash);
             return hashValue;
         }
+        //not possible to end up here
         return -1;
     }
 
