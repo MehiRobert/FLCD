@@ -18,12 +18,8 @@ public class MyScanner {
 
     private final ProgramInternalForm PIF = new ProgramInternalForm();
 
-    private Map<String, Integer> ST = new HashMap<>();
 
-
-    private int capacity = 100;
-
-    private SymbolTable symbolTable = new SymbolTable(100);
+    private final SymbolTable symbolTable ;
 
     public MyScanner()
     {
@@ -67,12 +63,9 @@ public class MyScanner {
             {
                 String line = reader.nextLine();
 
-                //getting rid of the white spaces
-
                 List<String> tokens = tokenize(line);
 
                 scan(tokens);
-
 
 
 
