@@ -1,0 +1,12 @@
+a: integer
+write.Text("Input 1 number to check if it is a prime") a = readInteger()
+verify [a < 2]:
+write.Text("Not prime") otherwise verify [a == 2]:
+write.Text("Prime") otherwise:
+    For [i = 3, i*i < a, i++]
+    {
+    verify [a % i == 0]:
+        write.Text("Not prime")
+            stop()
+    }
+write.Text("Prime")

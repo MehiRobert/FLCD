@@ -1,0 +1,21 @@
+a: integer
+
+b: integer
+
+c: integer
+
+minimum: integer
+
+write.Text("Input 3 numbers in order to find the minimum") a = readInteger()
+
+b = readInteger()
+
+c = readInteger()
+
+verify [a < b] and [a < c]:
+            minimum = a
+    otherwise verify [b < c] and [b < a]:
+            minimum = b
+    otherwise:
+            minimum = c
+write.text(minimum)
