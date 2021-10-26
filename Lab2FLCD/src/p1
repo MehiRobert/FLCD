@@ -4,9 +4,12 @@ b: integer
 
 c: integer
 
+
 minimum: integer
 
-write.Text("Input 3 numbers in order to find the minimum") a = readInteger()
+write.Text("Input 3 numbers in order to find the minimum")
+
+a = readInteger()
 
 b = readInteger()
 

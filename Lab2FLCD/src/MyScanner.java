@@ -4,17 +4,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 
+
+
 public class MyScanner {
 
-    private List<String> tokens = new ArrayList<>();
+    String path="/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/";
 
-    private final List<String> separators = Arrays.asList("[","]","(",")", ",", "\n");
+    private final List<String> tokens = new ArrayList<>();
 
-    private final List<String> operators = Arrays.asList("+","-","*","/",":","=","%","<=",">=","!=",">","<","||","&&","and","write.Text");
+    private final List<String> separators = Arrays.asList("[","]","(",")", ",","{","}",".", "\n");
 
-    private final List<String> reservedWords = Arrays.asList("integer","character","verify","otherwise","For","write","string","boolean");
+    private final List<String> operators = Arrays.asList("+","-","*","/",":","=","%","<=",">=","!=",">","<","||","&&","and");
 
-    private final List<String> types = Arrays.asList("integer","boolean","string","character");
+    private final List<String> reservedWords = Arrays.asList("integer","character","verify","otherwise","For","write","string","boolean","array","Text","length","stop","get");
 
     private final ProgramInternalForm PIF = new ProgramInternalForm();
 
@@ -24,30 +26,9 @@ public class MyScanner {
     public MyScanner()
     {
 
-        readTokens();
 
         this.symbolTable = new SymbolTable(100);
     }
-
-    public void readTokens() {
-        try {
-
-            File file = new File("/Users/mehimihai/IdeaProjects/Lab2FLCD/src/token");
-
-            Scanner reader = new Scanner(file);
-
-            while(reader.hasNextLine())
-            {
-                String token = reader.nextLine();
-                tokens.add(token);
-            }
-            reader.close();
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     public List<String> getTokens() {
         return tokens;
@@ -59,13 +40,17 @@ public class MyScanner {
             File file = new File(programFile);
             Scanner reader = new Scanner(file);
 
+            int counter = 1;
+
             while(reader.hasNextLine())
             {
                 String line = reader.nextLine();
 
                 List<String> tokens = tokenize(line);
 
-                scan(tokens);
+                scan(tokens, counter);
+
+                counter++;
 
 
 
@@ -129,7 +114,7 @@ public class MyScanner {
         return tokens;
     }
 
-    public void scan(List<String> tokensLine)
+    public void scan(List<String> tokensLine,Integer line)
     {
         tokensLine.forEach(token -> {
             if(this.reservedWords.contains(token))
@@ -142,9 +127,6 @@ public class MyScanner {
             else if (this.separators.contains(token)) {
                 this.PIF.add(token,4);
             }
-            else if(isArray(token)) {
-                this.PIF.add(token,5);
-            }
             else if(isIdentifier(token)){
                 int position = this.symbolTable.addInSymbolTable(token);
                 this.PIF.add(token,position);
@@ -152,6 +134,13 @@ public class MyScanner {
             else if(isConstant(token)) {
                 int position = this.symbolTable.addInSymbolTable(token);
                 this.PIF.add("const",position);
+            }
+            else
+            {
+               String error = "Lexical error on line " + line +  " -> " +  token + " <- ";
+
+
+                writeError(path + "p3err.out",error);
             }
 
 
@@ -166,13 +155,13 @@ public class MyScanner {
     }
 
     public boolean isCharacter(String token) {
-        String character = "^\'[a-zA-Z0-9_]\'$";
+        String character = "^\'[a-zA-Z0-9]\'$";
 
         return token.matches(character);
     }
 
     public boolean isString(String token) {
-        String pattern = "^[a-zA-Z0-9_ ]*$";
+        String pattern = "^[a-zA-Z0-9 ]*$";
 
         return token.matches(pattern);
     }
@@ -183,12 +172,6 @@ public class MyScanner {
         return token.matches(pattern);
     }
 
-    public boolean isArray(String token) {
-       String[] possibleArray = token.split("\\.");
-       if(possibleArray.length != 2)
-           return false;
-       return this.types.contains(possibleArray[0]) && possibleArray[1].equals("array");
-    }
     public boolean isConstant(String token) {
         return isNumber(token) || isString(token) || isCharacter(token) || token.equals("true") || token.equals("false");
     }
@@ -212,6 +195,18 @@ public class MyScanner {
             fw.write(this.PIF.toString());
             fw.close();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void writeError(String filename, String error) {
+        try{
+            FileWriter fw = new FileWriter(filename);
+            fw.write(error);
+            fw.write("\n\n");
+            fw.close();
+        }
+        catch (IOException e) {
             e.printStackTrace();
         }
     }

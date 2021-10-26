@@ -1,12 +1,12 @@
-array: integer.array(1, 2, 3, 4, 5, 6, 7, -1, -4, -8, 8)
+arrayList : integer.array(1, 2, 3, 4, 5, 6, 7, -1, -4, -8, 8)
 minimum: integer
 maximum: integer = 0
-For [i = 0, i < array.length(), i++] {
-verify [array.get(i) > maximum ]:
-    maximum = array.get(i)
+For [i = 0, i < arrayList.length(), i++]; {
+verify [arrayList.get(i) > maximum ]:
+    maximum = arrayList.get(i)
 verify [i == 0]:
-    minimum = array.get(i)
+    minimum = arrayList.get(i)
 verify [array.get(i) < minimum]:
-    minimum = array.get(i)
+    minimum = arrayList.get(i)
 }
 write.Text(" Minimum is " + minimum + " Maximum is " + maximum)

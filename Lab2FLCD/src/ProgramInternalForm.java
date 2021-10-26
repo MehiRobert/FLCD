@@ -6,10 +6,6 @@ public class ProgramInternalForm {
 
         private final List<Pair<String,Integer>> PIF = new ArrayList<>();
 
-        public List<Pair<String,Integer>> getPIF() {
-            return PIF;
-        }
-
 
         public void add(String token, int type)
         {
