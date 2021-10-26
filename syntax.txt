@@ -1,0 +1,17 @@
+compoundStmt = (declarationStmt | arrayDeclarationStmt | statement) "," [compoundStmt]
+arrayDeclarationStmt = identifier ":" primitiveType "." "array" "("  int_number  ")"
+declarationStmt = ("const" | "let") identifier ":" primitiveType ["=" expression]
+primitiveType = "integer" | "character" | "string" | "boolean"
+constValue = int_number | char | constString | bool
+statement = assigntStmt | ioStatement | ifStmt | whileStmt
+ioStmt = readStmt | writeStmt 
+assignStmt = identifier "=" expression
+readStmt = read "(" identifier ")"
+writeStmt = write "(" identifier ")"
+term = factor [("*" | "/") term]
+expression = term [("+" | "-") expression]
+factor = int_number | identifier |  "(" expression ")"
+ifStmt = "VERIFY" "[" condition "]" ":" "{" compoundStatement "}" ["OTHERWISE" ":" "{" compoundStatement "}"] 
+whileStmt ::= "WHILE" "[" condition "]" "{" compoundStatement "}"
+condition = expression relationalOperator expression 
+relationalOperator =  "<" | ">" | "<=" | ">=" | "==" || "!=" | "&&" | "||" | "<>"
