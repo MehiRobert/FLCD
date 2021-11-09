@@ -22,4 +22,20 @@ public class Pair<T,S> {
     {
         return "(" + this.first.toString() + ", " + this.second.toString() + ")";
     }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+
+    @Override
+    public boolean equals(Object o)
+    {
+        if(! (o instanceof Pair))
+            return false;
+        Pair pair = (Pair) o;
+
+        return (pair.getFirst().equals(this.first) && pair.getSecond().equals(this.second));
+    }
 }

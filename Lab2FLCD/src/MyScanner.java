@@ -149,9 +149,10 @@ public class MyScanner {
 
     public boolean isIdentifier(String token) {
 
-        String pattern = "^([a-zZ-Z])+([a-zA-Z]|[0-9])*$";
+//        String pattern = "^([a-zZ-Z])+([a-zA-Z]|[0-9])*$";
 
-        return  token.matches(pattern);
+        FiniteAutomata fa = new FiniteAutomata("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/identifierFa.in");
+        return  fa.checkSequence(token);
     }
 
     public boolean isCharacter(String token) {
@@ -167,9 +168,14 @@ public class MyScanner {
     }
 
     public boolean isNumber(String token) {
-        String pattern = "^([+|-]?[1-9][0-9]*)|0$";
+//        String pattern = "^([+|-]?[1-9][0-9]*)|0$";
 
-        return token.matches(pattern);
+        FiniteAutomata fa = new FiniteAutomata("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/integerFa.in");
+
+
+          return fa.checkSequence(token);
+
+//        return token.matches(pattern);
     }
 
     public boolean isConstant(String token) {
