@@ -13,6 +13,15 @@ public class Main {
 
         MyScanner p1 = new MyScanner();
 
+        Grammar g1 = new Grammar("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/G1.txt");
+
+        System.out.println(g1.getNonterminals());
+
+        System.out.println(g1.getTerminals());
+
+        System.out.println(g1.getProductions());
+
+        System.out.println(g1.productionsForNonTerminal("S"));
 
 
         FiniteAutomata FA = new FiniteAutomata("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/Fa.in");
