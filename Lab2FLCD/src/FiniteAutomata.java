@@ -47,11 +47,8 @@ public class FiniteAutomata {
             {
 
                 cnt++;
-                System.out.println(cnt);
-                System.out.println(this.finalStates);
                 String[] transition = reader.nextLine().split(" ");
                 Pair newPair = new Pair<>(transition[0],transition[1]);
-                System.out.println(this.transitions.containsKey(newPair));
                 if(this.transitions.containsKey(newPair))
                 {
                     if(!this.transitions.get(newPair).contains(transition[2]))
