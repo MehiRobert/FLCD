@@ -13,7 +13,7 @@ public class Main {
 
         MyScanner p1 = new MyScanner();
 
-        Grammar g1 = new Grammar("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/G1.txt");
+        Grammar g1 = new Grammar("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/G2.txt");
 
         System.out.println(g1.getNonterminals());
 
@@ -33,6 +33,7 @@ public class Main {
         System.out.println("4. Show the Transitions of the FA");
         System.out.println("5. Check if FA is deterministic");
         System.out.println("6. Check if sequence is accepted");
+        System.out.println("7. Check if CFG");
         System.out.println("0. Exit the program");
 
         boolean select = true;
@@ -55,6 +56,7 @@ public class Main {
 
                     System.out.println(FA.checkSequence(sequence));
                 }
+                case "7" -> System.out.println(g1.isCFG());
                 case "0" -> select = false;
                 default -> System.out.println("Choose one of the options from above");
             }

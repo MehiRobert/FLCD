@@ -1,0 +1,18 @@
+program,compoundStatement,declarationStatement,primitiveType,constantValue,arrayDeclarationStatement,statement,assignmentStatement,ioStatement,readStatement,writeStatement,term,expression,factor,condition,relationalOperator,ifStatement
++,-,*,/,=,<,>,<=,>=,<>,==,===,!=,&&,||,start,end,const,let,int,array,char,string,read,write,check,else,while,for,break
+program -> start compoundStatement end
+compoundStatement -> declarationStatement | arrayDeclarationStatement | statement ; [compoundStatement] declarationStatement = (const | let) identifier : primitiveType [= expression]
+primitiveType -> int | char | string
+constantValue -> int | character | string | bool
+arrayDeclarationStatement -> (const | let) identifier : primitiveType [ int ]
+statement -> assignmentStatement | ioStatement | ifStatement | whileStatement
+assignmentStatement -> identifier = expression
+ioStatement -> readStatement | writeStatement
+readStatement -> read ( identifier )
+writeStatement -> write ( identifier )
+term -> factor [(* | /) term]
+expression -> term [(+ | -) expression]
+factor -> int | identifier | ( expression )
+ifStatement -> check ( condition ) { compoundStatement } [else { compoundStatement }] whileStatement = while ( condition ) { compoundStatement }
+condition -> expression relationOperator expression
+relationalOperator -> < | > | <= | >= | == | === | != | && | || | <>

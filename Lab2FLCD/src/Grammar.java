@@ -8,7 +8,7 @@ public class Grammar {
 
     private List<String> nonterminals;
 
-    public List<Pair<String,String>> productions;
+    private Map<String, List<List<String>>> productions;
 
     private String startingSymbol;
 
@@ -16,7 +16,7 @@ public class Grammar {
 
         this.nonterminals = new ArrayList<>();
 
-        this.productions = new ArrayList<>();
+        this.productions = new LinkedHashMap<>();
 
         this.terminals = new ArrayList<>();
 
@@ -34,11 +34,18 @@ public class Grammar {
             while(scanner.hasNextLine())
             {
 
-                String[] transition = scanner.nextLine().split(" -> ");
-                Arrays.stream(transition[1].trim().split("\\|")).forEach(e ->
-                    this.productions.add(new Pair<>(transition[0],e)
+                List<String> transition = Arrays.asList(scanner.nextLine().split(" -> "));
+                List<List<String>> allStates = new ArrayList<>();
+                Arrays.stream(transition.get(1).split(" \\| ")).forEach(e ->
+                    allStates.add(Arrays.asList(e.split(" "))
                 ));
 
+                if(this.productions.containsKey(transition.get(0))){
+                    this.productions.get(transition.get(0)).addAll(allStates);
+                }
+                else {
+                    this.productions.put(transition.get(0),allStates);
+                }
 
             }
 
@@ -48,15 +55,16 @@ public class Grammar {
         }
     }
 
-    public List<Pair<String,String>> productionsForNonTerminal(String nonTerminal){
+    public List<List<String>> productionsForNonTerminal(String nonTerminal){
         if(!this.nonterminals.contains(nonTerminal))
             return new ArrayList<>();
-        List<Pair<String,String>> result = new ArrayList<>();
-        for (var x : this.productions)
+        List<List<String>> result = new ArrayList<>();
+        for (var x : this.productions.entrySet())
         {
-            if(x.getFirst().contains(nonTerminal))
+            List<List<String>> listOfProd = x.getValue();
+            if(x.getKey().equals(nonTerminal))
             {
-                    result.add(x);
+                result.addAll(listOfProd);
             }
         }
         return result;
@@ -71,12 +79,28 @@ public class Grammar {
         return nonterminals;
     }
 
-    public List<Pair<String,String>> getProductions() {
+    public Map<String,List<List<String>>> getProductions() {
         return productions;
     }
 
     public String getStartingSymbol() {
         return startingSymbol;
+    }
+
+    public boolean isCFG() {
+        Set<String> keys = this.productions.keySet();
+
+
+        for(String key: keys){
+            if(key.split(" ").length != 1 || this.terminals.contains(key) || !this.nonterminals.contains(key))
+            {
+                System.out.println(key);
+                System.out.println(this.nonterminals);
+                return false;
+            }
+        }
+        return true;
+
     }
 
 
