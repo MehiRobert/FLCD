@@ -10,8 +10,9 @@ public class RecursiveDesc {
     public Config config;
     public String sequence;
 
-    public RecursiveDesc(Grammar grammar){
+    public RecursiveDesc(Grammar grammar, String sequence){
         this.grammar = grammar;
+        this.sequence = sequence;
         config = new Config();
         config.state = StateValues.q;
         config.position = 1;
@@ -54,27 +55,17 @@ public class RecursiveDesc {
     }
 
     public void momentaryInsuccess() {
-        String headOfInputStack = "E";
-        if(config.inputStack.size() > 0){
-            headOfInputStack = config.inputStack.get(0);
-        }
-        else {
-            config.state = StateValues.b;
-        }
 
-        if(grammar.getTerminals().contains(headOfInputStack) &&
-            !headOfInputStack.equals(String.valueOf(sequence.charAt(config.position) + 1))) {
-            config.state = StateValues.b;
-        }
+        config.state = StateValues.b;
 
     }
 
     public void back() {
             String currentElement = config.workingStack.get(config.workingStack.size() - 1);
-            if(grammar.getNonterminals().contains(currentElement)) {
+            if(grammar.getTerminals().contains(currentElement)) {
                 config.position--;
                 config.workingStack.remove(currentElement);
-                config.inputStack.add(0, currentElement);
+                config.inputStack.add(0,currentElement);
             }
 
     }

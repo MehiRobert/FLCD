@@ -2,7 +2,7 @@ S,A,B,C,D
 a,b,c
 S
 S -> a A | a C
-A -> A B
-Ba -> b
-C -> a C | C D
+A -> b B
+B -> b
+C -> c C | c D
 D -> b

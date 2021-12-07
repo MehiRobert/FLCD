@@ -13,7 +13,7 @@ public class Main {
 
         MyScanner p1 = new MyScanner();
 
-        Grammar g1 = new Grammar("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/G2.txt");
+        Grammar g1 = new Grammar("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/G1.txt");
 
         System.out.println(g1.getNonterminals());
 
@@ -22,6 +22,13 @@ public class Main {
         System.out.println(g1.getProductions());
 
         System.out.println(g1.productionsForNonTerminal("S"));
+
+        RecursiveDesc recursiveDesc = new RecursiveDesc(g1,"aabb");
+
+        RecursiveDescAlgorithm recursiveDescAlgorithm = new RecursiveDescAlgorithm(recursiveDesc);
+        recursiveDescAlgorithm.parse();
+
+
 
 
         FiniteAutomata FA = new FiniteAutomata("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/Fa.in");
