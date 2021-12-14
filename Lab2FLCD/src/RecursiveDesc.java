@@ -33,7 +33,7 @@ public class RecursiveDesc {
 
             for(var key: grammar.getProductions().entrySet()){
                 if(key.getKey().equals(currentElem)){
-                    config.inputStack.addAll(key.getValue().get(0));
+                   config.inputStack.addAll(key.getValue().get(0));
                 }
             }
 
@@ -64,7 +64,7 @@ public class RecursiveDesc {
             String currentElement = config.workingStack.get(config.workingStack.size() - 1);
             if(grammar.getTerminals().contains(currentElement)) {
                 config.position--;
-                config.workingStack.remove(currentElement);
+                config.workingStack.remove(config.workingStack.size() - 1);
                 config.inputStack.add(0,currentElement);
             }
 

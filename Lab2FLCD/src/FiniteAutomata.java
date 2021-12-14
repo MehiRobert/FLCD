@@ -85,7 +85,7 @@ public class FiniteAutomata {
         }
         else{
             String currentState = this.initialState;
-            for(char c: sequence.toCharArray())
+            for(String c: sequence.split(" "))
             {
                 Pair<String,String> stringPair = new Pair<>(currentState,String.valueOf(c));
                 if(this.transitions.containsKey(stringPair))

@@ -2,7 +2,7 @@
 
 public class RecursiveDescAlgorithm {
 
-    private RecursiveDesc recursiveDesc;
+    private final RecursiveDesc recursiveDesc;
 
     public RecursiveDescAlgorithm(RecursiveDesc recursiveDesc){
         this.recursiveDesc = recursiveDesc;

@@ -1,0 +1,1 @@
+S -> aC -> acC -> accC -> acccC -> accccC -> acccccC -> accccccC -> acccccccC -> accccccccD -> accccccccb

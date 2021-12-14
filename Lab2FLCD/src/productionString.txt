@@ -1,0 +1,1 @@
+S -> aC, C -> cC, C -> cC, C -> cC, C -> cC, C -> cC, C -> cC, C -> cC, C -> cD, D -> b

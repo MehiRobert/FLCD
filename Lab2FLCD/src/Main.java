@@ -23,13 +23,15 @@ public class Main {
 
         System.out.println(g1.productionsForNonTerminal("S"));
 
-        RecursiveDesc recursiveDesc = new RecursiveDesc(g1,"aabb");
+        String sequence2 = "let l: int;";
+
+        RecursiveDesc recursiveDesc = new RecursiveDesc(g1,"accccccccb");
 
         RecursiveDescAlgorithm recursiveDescAlgorithm = new RecursiveDescAlgorithm(recursiveDesc);
         recursiveDescAlgorithm.parse();
 
 
-
+        ParserOutput parserOutput = new ParserOutput(recursiveDesc);
 
         FiniteAutomata FA = new FiniteAutomata("/Users/mehimihai/Desktop/Faculta/FLCD/Lab1b/FLCD/Lab2FLCD/src/Fa.in");
 
